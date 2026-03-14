@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Semantic priming and spreading activation network for LegionIO'
   spec.description   = 'Models spreading activation in semantic networks - priming one concept activates related ' \
-                        'concepts with distance-based decay for rapid associative retrieval.'
+                       'concepts with distance-based decay for rapid associative retrieval.'
   spec.homepage      = 'https://github.com/LegionIO/lex-semantic-priming'
   spec.license       = 'MIT'
 

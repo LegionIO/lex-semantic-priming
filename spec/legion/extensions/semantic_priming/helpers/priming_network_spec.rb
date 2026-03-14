@@ -32,7 +32,7 @@ RSpec.describe Legion::Extensions::SemanticPriming::Helpers::PrimingNetwork do
     end
 
     it 'removes associated connections' do
-      conn = network.connect(source_id: doctor.id, target_id: nurse.id)
+      network.connect(source_id: doctor.id, target_id: nurse.id)
       network.remove_node(node_id: doctor.id)
       expect(network.connection_between(source_id: doctor.id, target_id: nurse.id)).to be_nil
     end
@@ -67,16 +67,16 @@ RSpec.describe Legion::Extensions::SemanticPriming::Helpers::PrimingNetwork do
 
   describe '#prime_and_spread' do
     it 'primes the target and spreads to neighbors' do
-      network.connect(source_id: doctor.id, target_id: nurse.id)
-      result = network.prime_and_spread(node_id: doctor.id)
+      network.connect(source_id: doctor.id, target_id: nurse.id, weight: 0.8)
+      result = network.prime_and_spread(node_id: doctor.id, amount: 0.8)
       expect(result[:primed_node][:activation]).to be > 0
       expect(result[:spread].size).to be >= 1
     end
 
     it 'spreads activation through multi-hop paths' do
-      network.connect(source_id: doctor.id, target_id: nurse.id, weight: 0.8)
-      network.connect(source_id: nurse.id, target_id: hospital.id, weight: 0.8)
-      network.prime_and_spread(node_id: doctor.id, amount: 0.8)
+      network.connect(source_id: doctor.id, target_id: nurse.id, weight: 0.9)
+      network.connect(source_id: nurse.id, target_id: hospital.id, weight: 0.9)
+      network.prime_and_spread(node_id: doctor.id, amount: 0.9)
       expect(hospital.activation).to be > 0
     end
 

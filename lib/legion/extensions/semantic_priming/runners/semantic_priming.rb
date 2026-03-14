@@ -5,9 +5,7 @@ module Legion
     module SemanticPriming
       module Runners
         module SemanticPriming
-          if defined?(Legion::Extensions::Helpers::Lex)
-            include Legion::Extensions::Helpers::Lex
-          end
+          include Legion::Extensions::Helpers::Lex if defined?(Legion::Extensions::Helpers::Lex)
 
           def add_node(label:, node_type: :concept, engine: nil, **)
             eng = engine || default_engine
